@@ -38,4 +38,32 @@
   - remove monitor using EventID returned by `addMonitor`
   - alternatively monitor can be removed by returning False from event handler
 
-*
+* `notifyEvent :: (MonadState s) m => EventDistributorLens ev m s -> ev -> m ()`
+  - publish event , that will be distributed across registered subscribers (monitors). Every event can be delivered to 0,1 or many subscribers, based on filters used up subscribers registration
+
+As an additional convenience abbreviated flavor of these function are supported:
+```
+monitorsL :: ((MonadState s) m, HasEventDistr ev m s) =>  m [EventID]
+addMonitorL :: ((MonadState s) m, HasEventDistr ev m s) => EventMonitor ev m -> m EventID
+removeMonitorL :: ((MonadState s) m, HasEventDistr ev m s) => EventID -> m ()
+notifyEventL :: ((MonadState s) m, HasEventDistr ev m s) => ev -> m ()
+```
+
+These functions use type class type to locate proper distributor:
+
+`class HasEventDistr ev m s | s -> ev where
+  evDistr :: (MonadState s) m =>  Lens' s (EventDistributor ev m s)
+`
+
+The instance of this type class is extremely straightforward:
+
+```
+data MyState=MyState {_distr::EventDistributor MyEvent (StateT MyState IO) MyState, _counter :: Int}
+
+makeLenses ''MyState
+
+instance HasEventDistr MyEvent (StateT MyState IO) MyState where
+  evDistr = distr
+```  
+
+For more details and an example, please refer to Main.hs
