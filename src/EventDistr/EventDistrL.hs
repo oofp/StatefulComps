@@ -3,7 +3,6 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE KindSignatures #-}
 
 module EventDistrL
     (
@@ -37,17 +36,3 @@ removeMonitorL  = removeMonitor evDistr
 
 notifyEventL :: ((MonadState s) m, HasEventDistr ev m s) => ev -> m ()
 notifyEventL  = notifyEvent evDistr
-
-{-
-class HasEventDistr s where
-  evDistr :: Lens' s (EventDistributor Text (StateT s IO) s)
-
-monitorsL :: (HasEventDistr s) =>  StateT s IO [EventID]
-monitorsL = monitors evDistr
-
-class HasEventDistr2 ev s | s -> ev where
-  evDistr2 :: Lens' s (EventDistributor ev (StateT s IO) s)
-
-monitorsL2 :: (HasEventDistr2 ev s) =>  StateT s IO [EventID]
-monitorsL2 = monitors evDistr2
--}
