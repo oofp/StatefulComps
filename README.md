@@ -30,7 +30,7 @@
 
 
 * `addMonitorWithTrans :: (MonadState s) m => EventDistributorLens ev m s -> (ev->Maybe ev') -> EventHandler ev' m -> m EventID`
-  - convinice method that allows passing (ev->Maybe ev') function instead of predicate to allow both filtering and conversion of monitored event
+  - convinience method that allows passing (ev->Maybe ev') function instead of predicate to allow both filtering and conversion of monitored event
 
 
 * `removeMonitor :: (MonadState s) m => EventDistributorLens ev m s -> EventID -> m ()``
