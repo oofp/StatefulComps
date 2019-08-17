@@ -1,13 +1,13 @@
 name:                StatefulComps
-version:             0.1.0.0
+version:             0.2.0.0
 -- synopsis:
 -- description:
 homepage:            https://github.com/githubuser/StatefulComps#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2017 Author name here
+author:              oofpgit@gmail.com
+maintainer:          oofpgit@gmail.com
+copyright:           2017-2019 oofpgit@gmail.com
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
